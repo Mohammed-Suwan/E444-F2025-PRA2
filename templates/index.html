@@ -1,11 +1,19 @@
 {% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %}Flasky{% endblock %}
 
 {% block page_content %}
-<div class="page-header">
-    <h1>Hello Suwan!</h1>
-</div>
-<p>The local date and time is {{ moment(current_time).format('LLL') }}.</p>
-<p>That was {{ moment(current_time).fromNow(refresh=True) }}.</p>
+  <div class="page-header">
+    <h1>Hello, {% if name %}{{ name }}{% else %}Stranger{% endif %}!</h1>
+  </div>
+
+  {{ wtf.quick_form(form) }}
+
+  {% if email and username %}
+    <hr>
+    <p class="lead mb-1">Username: <strong>{{ username }}</strong></p>
+    <p class="lead">Email: <strong>{{ email }}</strong></p>
+    <p>Current time: {{ moment().format('LLLL') }}</p>
+  {% endif %}
 {% endblock %}

@@ -78,6 +78,10 @@ def index():
             flash('Please use your UofT email (must contain "utoronto").')
             return redirect(url_for('index'))
 
+        old_name = session.get('name')
+        if old_name is not None and old_name != name:
+            flash('Looks like you have changed your name!')
+
         # Save to session
         session['name'] = name
         session['email'] = email
